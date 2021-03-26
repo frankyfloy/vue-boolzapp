@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size:100%;
+}
+
+body{
+    background: linear-gradient(0deg, #dfdfdf 85%, #009788 15%);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+#root{
+    height: 90vh;
+    width: 80vw;
+    margin: 30px auto 0 auto;
+    background-color: white;
+}
+
+
+#sidebar{
+    width: 35%;
+    height: 100%;
+    background-color: yellow;
+    float: left;
+    border-right: 1px solid black;
+}
+
+#consoleChat{
+    width: 65%;
+    height: 100%;
+    float: left;
+    background-color: black;
+}
+
+.nav-sidebar,.nav-console{
+    height: 10%;
+    width: 100%;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.notifications{
+    height: 12%;
+    background-color: yellow;
+}
+
+.cont-list-users{
+    height: calc(100% - 12% - 10%);
+    background-color: blue;
+}
+
+.cont-chat{
+    height: 80%;
+    width: 100%;
+    background-image: url("img\\mine.jpg");
+}
+
+.cont-input{
+    height: 10%;
+    width: 100%;
+    background-color: red;
+}
+
+
+.img-users{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.nav-sidebar div i,.nav-console div i{
+    font-size: 18px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #b1b1b1;
+}
+
+.cont-icon-slash{
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+}
+
+.cont-icon-slash .fa-bell-slash{
+    margin: auto;
+}
+
+.notifications{
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* ---------------Scroll Vertical (Classe Scroll)------------------------- */
+.scroll{
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.scroll::-webkit-scrollbar{
+	-webkit-overflow-scrolling: auto;
+	width: 6px;
+}
+.scroll::-webkit-scrollbar-thumb{
+	border-radius: 4px;
+    background-color: #120038;
+    box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+/* ------------------------------------------------------------- */
