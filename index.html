@@ -13,10 +13,10 @@
         <link rel="stylesheet" href="assets\master.css">
 
         <!-- VUE : development version, includes helpful console warnings-->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
 
         <!-- VUE CDN 2 -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
         <!-- Fontawesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
@@ -27,8 +27,7 @@
     <body>
 
         <div id="root">
-            <sidebar id="sidebar">
-
+            <aside id="sidebar">
                 <nav class="nav-sidebar">
                     <div class="ml-3">
                         <img src="assets\img\avatar_io.jpg" class="img-users">
@@ -42,51 +41,97 @@
                 </nav>
 
                 <div class="notifications">
-                    <div class="cont-icon-slash">
+                    <div class="cont-icon-slash mr-3">
                         <i class="fas fa-bell-slash"></i>
                     </div>
-                    <div class="">
+                    <div>
                         <h3>Ricevi notifiche di nuovi messaggi</h3>
                         <a href="#">Attiva notifiche desktop</a>
                     </div>
 
                 </div>
 
-                <div class="cont-list-users scroll">
+
+                <div class="cont-list-users">
+                    <nav class="input-group">
+                        <div class="input-group-prepend d-flex d-inline">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+
+                        </div>
+                        <div class="prova d-flex">
+                            <button type="button" class="btn btn-outline-light btn-block myBtnController"><input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Username" aria-describedby="basic-addon1"></button>
+                        </div>
+
+                    </nav>
+
+
+
+                    <div id="list-users" class="scroll">
+                        <ul>
+                            <li v-for="(user,i) in contacts" @click="chatActive(user)" class="infoProfileChat">
+                                <img v-bind:src="'./assets/img/avatar' +  user.avatar + '.jpg'"  class="img-users" alt="">
+                                {{user.name}}
+                            </li>
+                        </ul>
+                    </div>
+
 
                 </div>
 
-            </sidebar>
+            </aside>
 
 
 
-            <div id="consoleChat">
+            <div id="consoleChat" v-if="(chatActiveObj)">
                 <nav class="nav-console">
-                    <div class="ml-3">
-                        <img src="assets\img\avatar_io.jpg" class="img-users">
+                    <div class="d-flex align-items-center ml-3 infoProfileChat">
+
+                        <img v-bind:src="'./assets/img/avatar' +  chatActiveObj.avatar + '.jpg'"  class="img-users" alt="">
+                        <div>
+                            <div>{{chatActiveObj.name}}</div>
+                            <p class="mb-0">Ultimo accesso oggi alle</p>
+                        </div>
+
                     </div>
 
                     <div class="mr-3">
-                        <i class="fas fa-circle-notch"></i>
-                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-paperclip"></i>
                         <i class="fas fa-ellipsis-v "></i>
                     </div>
                 </nav>
 
                 <div class="cont-chat scroll">
+                    <ul>
+                        <li v-for="(message,i) in chatActiveObj.messages">
+                            {{message.text}}
 
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="cont-input">
 
+
+                    <div class="input-group d-flex">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="far fa-smile"></i></span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-microphone"></i></span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <h1 v-else>Oh no 😢</h1>
 
         </div>
 
 
 
         <!-- Script js -->
-        <script src="assets\dati.js" charset="utf-8"></script>
+        <script src="assets\main.js" charset="utf-8"></script>
     </body>
 </html>
