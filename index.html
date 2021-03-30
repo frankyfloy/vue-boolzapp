@@ -12,20 +12,25 @@
         <!-- mycss and media-query -->
         <link rel="stylesheet" href="assets\master.css">
 
-        <!-- VUE : development version, includes helpful console warnings-->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-
         <!-- VUE CDN 2 -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous"></script>
 
         <!-- Fontawesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
+        <!-- Animate -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+        <!-- sweetalert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.all.min.js"></script>
+
+        <!-- font family -->
         <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-
     </head>
-    <body>
 
+    <body>
         <div id="root">
             <aside id="sidebar">
                 <nav class="nav-sidebar">
@@ -40,47 +45,37 @@
                     </div>
                 </nav>
 
-                <div class="notifications">
+                <div v-if="notifications != true" class="notifications" >
                     <div class="cont-icon-slash mr-3">
                         <i class="fas fa-bell-slash"></i>
                     </div>
                     <div>
                         <h3>Ricevi notifiche di nuovi messaggi</h3>
-                        <a href="#">Attiva notifiche desktop</a>
+                        <a @click="showNotification" href="#">Attiva notifiche desktop</a>
                     </div>
-
                 </div>
-
 
                 <div class="cont-list-users">
                     <nav class="input-group">
-                        <div class="input-group-prepend d-flex d-inline">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <label @click="inputActive" for="myInput" class="input-group-text btn-search"><i :class="[InputActive ? 'fa-arrow-left' : 'fa-search', 'fas']"></i></label>
 
                         </div>
-                        <div class="prova d-flex">
-                            <button type="button" class="btn btn-outline-light btn-block myBtnController"><input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Username" aria-describedby="basic-addon1"></button>
-                        </div>
-
+                        <input v-model="inputSearchUser" @keyup="searchValue" ref = "input" type="text" class="form-control" id="myInput" :placeholder="[[ InputActive ? '' : 'Cerca o inizia una nuova chat']]">
+                      </div>
                     </nav>
-
-
 
                     <div id="list-users" class="scroll">
                         <ul>
-                            <li v-for="(user,i) in contacts" @click="chatActive(user)" class="infoProfileChat">
+                            <li v-for="(user,i) in contactsFiltered" @click="chatActive(user)" class="infoProfileChat">
                                 <img v-bind:src="'./assets/img/avatar' +  user.avatar + '.jpg'"  class="img-users" alt="">
                                 {{user.name}}
                             </li>
                         </ul>
                     </div>
-
-
                 </div>
-
             </aside>
-
-
 
             <div id="consoleChat" v-if="(chatActiveObj)">
                 <nav class="nav-console">
@@ -89,7 +84,7 @@
                         <img v-bind:src="'./assets/img/avatar' +  chatActiveObj.avatar + '.jpg'"  class="img-users" alt="">
                         <div>
                             <div>{{chatActiveObj.name}}</div>
-                            <p class="mb-0">Ultimo accesso oggi alle</p>
+                            <p class="mb-0">Ultimo accesso  {{userLastAccess}}</p>
                         </div>
 
                     </div>
@@ -103,10 +98,13 @@
 
                 <div class="cont-chat scroll">
                     <ul>
-                        <li v-for="(message,i) in chatActiveObj.messages">
-                            {{message.text}}
+                        <li v-for="(message, i) in chatActiveObj.messages">
+                        <!-- sent -->
+                        <div class="sent" v-if="(message.status == 'sent')"><span class="f_Size-20px">{{message.text}}</span> <br> <span class="f_Size-12px">{{message.date}}</span></div>
 
-                        </li>
+                        <!-- received -->
+                        <div class="received" v-else><span class="f_Size-20px">{{message.text}}</span> <br> <span class="f_Size-12px">{{message.date}}</span></div>
+                      </li>
                     </ul>
                 </div>
 
@@ -117,7 +115,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="far fa-smile"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+
+                        <input type="text" class="form-control" placeholder="Scrivi un messaggio" aria-label="Scrivi un messaggio" @keyup.enter="sendMessage" v-model="textSend">
+
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-microphone"></i></span>
                         </div>
@@ -125,11 +125,12 @@
                 </div>
             </div>
 
-            <h1 v-else>Oh no 😢</h1>
+            <!-- TODO: creare pagina iniziale -->
+            <div v-else class="first-page-chat">
+                <h1>Oh no 😢</h1>
+            </div>
 
         </div>
-
-
 
         <!-- Script js -->
         <script src="assets\main.js" charset="utf-8"></script>

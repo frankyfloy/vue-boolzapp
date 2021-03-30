@@ -1,9 +1,18 @@
 var app = new Vue({
     el: '#root',
     data: {
-
+        notifications: false,
         chatActiveObj: "",
 
+        userLastAccess: moment().locale('it').calendar().toLowerCase(),
+        // change icon search
+        InputActive: false,
+        // value search profile
+        inputSearchUser: "",
+
+        // input message
+        textSend: "",
+        contactsFiltered : [],
 		contacts: [
 			{
 				name: 'Michele',
@@ -88,19 +97,91 @@ var app = new Vue({
 					}
 				],
 			},
-
 		]
 	},
 
-	mounthed: function(){
-		console.log("---------------");
+    // usare computed per didattica
+	computed:{
 	},
+
+    mounted: function() {
+       this.contactsFiltered = this.contacts.slice();
+    },
 
     methods: {
         chatActive: function (obj){
-            this.chatActiveObj = obj,
-            console.log(this.chatActiveObj);
+            this.chatActiveObj = obj;
+        },
+
+        sendMessage: function (){
+            var tmpObj = this.chatActiveObj;
+            if (this.textSend.length) {
+
+                this.chatActiveObj.messages.push({
+                    date: moment().format('LT'),
+                    text: this.textSend,
+                    status: 'sent',
+                }),
+                console.log(this.chatActiveObj.messages);
+            }
+
+            // Funzione timeout con self
+			let self = this;
+
+			// Funzione timeout
+			setTimeout(function () {
+				let obj =
+				{
+					date: this.messageDate,
+					text: "ok",
+					status: 'received'
+				}
+				self.chatActiveObj.messages.push(obj)
+			},3000)
+            this.textSend = "";
+        },
+
+
+        // Attivare le notifiche desktop
+        showNotification: function(){
+            this.notifications = true;
+
+            Swal.fire({
+                title: 'Notifiche attivate',
+                // text: 'Do you want to continue',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                showClass: {
+                    popup: 'animate__animated animate__fadeInDown'
+                },
+                hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+                }
+            })
+        },
+
+        inputActive: function(){
+            if (this.InputActive) {
+                this.InputActive = false
+            }else {
+                this.InputActive = true
+                // TODO: continuare focus sull input ricerca
+                // this.$refs.input.$el.focus()
+            }
+        },
+
+        searchValue: function(){
+            this.contactsFiltered = this.contacts;
+            if (this.inputSearchUser === "") {
+                this.contactsFiltered = this.contacts.slice();
+            }
+            else {
+                this.contactsFiltered = this.contacts.filter((element) => {
+                    console.log(element.name);
+                    return element.name.toUpperCase().includes(this.inputSearchUser.toUpperCase())
+
+                })
+            }
         }
     }
-
 });
