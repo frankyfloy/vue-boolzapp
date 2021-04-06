@@ -39,9 +39,9 @@
                     </div>
 
                     <div class="mr-3">
-                        <i class="fas fa-circle-notch"></i>
-                        <i class="fas fa-comment-alt"></i>
-                        <i class="fas fa-ellipsis-v "></i>
+                        <span class="cont-icon"><i class="fas fa-circle-notch"></i></span>
+                        <span class="cont-icon"><i class="fas fa-comment-alt"></i></span>
+                        <span class="cont-icon"><i class="fas fa-ellipsis-v"></i></span>
                     </div>
                 </nav>
 
@@ -56,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="cont-list-users" :class="[notifications ? 'mt-70px' : '']">
+                <div class="cont-list-users" :class="[notifications ? 'mt-65px' : '']">
                     <nav :class="[InputActive ? 'bg-white' : '']">
                       <div class="input-group">
                         <div class="input-group-prepend">
@@ -64,13 +64,6 @@
 
                         </div>
                         <input v-model="inputSearchUser" @keyup="searchValue" ref = "input" type="text" class="form-control" id="myInput" :placeholder="[ InputActive ? '' : 'Cerca o inizia una nuova chat']">
-
-                        <!-- Elemento vuoto per br radius -->
-                        <!-- TODO: da modificare togliendo il campo input -->
-                        <div class="input-group-prepend">
-                          <label type="labelEmpty"class="input-group-text pr-4"></label>
-
-                        </div>
                       </div>
 
                     </nav>
@@ -78,7 +71,7 @@
                     <div id="list-users" class="scroll">
                         <ul>
                             <li v-for="(user,i) in contactsFiltered" @click="chatActive(user)" class="infoProfileChat">
-                                <div class="">
+                                <div>
                                     <img v-bind:src="'./assets/img/avatar' +  user.avatar + '.jpg'"  class="img-users" alt="">
                                 </div>
                                 <div class="text-overflow-ell">
@@ -113,9 +106,13 @@
                     </div>
 
                     <div class="mr-3">
-                        <i class="fas fa-search"></i>
-                        <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-ellipsis-v "></i>
+                        <span class="cont-icon"><i class="fas fa-search"></i></span>
+                        <span class="cont-icon"><i class="fas fa-paperclip"></i></span>
+                        <span class="cont-icon"><i class="fas fa-ellipsis-v "></i></span>
+
+
+
+
                     </div>
                 </nav>
 
@@ -147,7 +144,7 @@
                         <input type="text" class="form-control" placeholder="Scrivi un messaggio" aria-label="Scrivi un messaggio" @keyup.enter="sendMessage" v-model="textSend">
 
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-microphone"></i></span>
+                            <span class="input-group-text cont-icon-message" id="basic-addon1"><i class="fas fa-microphone"></i></span>
                         </div>
                     </div>
                 </div>
@@ -155,7 +152,7 @@
 
             <!-- TODO: creare pagina iniziale -->
             <div v-else class="first-page-chat">
-                <h1 class="text-center mt-70px">Seleziona una chat</h1>
+                <h1 class="text-center mt-65px">Seleziona una chat</h1>
             </div>
         </div>
 

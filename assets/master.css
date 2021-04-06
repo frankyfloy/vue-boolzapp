@@ -33,6 +33,7 @@ body{
     min-width: 300px;
     height: 100%;
     border-right: 1px solid #888888;
+    background-color: #ffffff;
 }
 
 #consoleChat{
@@ -60,8 +61,6 @@ body{
     color: #aaaaaa;
 }
 
-
-
 /* CONTENITORE CHAT */
 .cont-chat{
     padding-top: 65px;
@@ -84,23 +83,18 @@ body{
     font-size: 14px;
 }
 
+
 .cont-list-users > nav{
+    background-color: #F3EEEA;
     -webkit-transition: background-color 500ms linear;
     -ms-transition: background-color 500ms linear;
     transition: background-color 500ms linear;
 }
 
-.cont-list-users > nav > .input-group > .input-group-prepend:last-child > [type="labelEmpty"]{
-    pointer-events: none;
-}
-
-/* lista utenti */
-.cont-chat ul{
-    padding: 39px;
-}
-
-#list-users > ul{
-    height: 500px;
+/* border right rounded */
+.cont-list-users > nav > .input-group>.form-control:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 #list-users li{
@@ -117,23 +111,20 @@ body{
     height: 100%;
     display: flex;
     align-items: center;
-    /* width:  calc(25% - 25px); */
 }
 
 #list-users li > div:last-child{
-    padding-right: 10px;
-    flex-grow: 2;
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: center;
-
+    padding-right: 10px;
 }
 
 .text-overflow-ell{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    width: 100%;
 }
 
 /* Transition icon search profile */
@@ -147,7 +138,7 @@ body{
 
 .cont-list-users .fa-arrow-left{
     /* padding: .375rem 1.10rem; */
-    color: black;
+    color: #8EDAFC;
     transition: all .30s cubic-bezier(.4,0,.2,1);
     transform: scale(.8) rotate(
     360deg
@@ -166,6 +157,10 @@ body{
 /* nav console */
 .infoProfileChat{
     cursor: pointer;
+}
+
+.cont-chat ul{
+    padding: 39px;
 }
 
 .input-group-text{
@@ -190,7 +185,6 @@ body{
 
 .cont-InputMessage > .input-group i{
     font-size: 25px;
-    padding: 15px;
     color: #999999;
 }
 
@@ -212,9 +206,47 @@ body{
 
 .cont-InputMessage .input-group .input-group-text {
     background-color: inherit;
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+}
+
+/* Bootstrap modifica bordo input-group-text sinistro*/
+.input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.cont-InputMessage .input-group-prepend .cont-icon-message{
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.cont-InputMessage  span.input-group-text i {
+    line-height: calc(50px - 25px / 2);
+    vertical-align: middle;
 }
 
 
+/* Transition icon cont-input-message */
+.cont-InputMessage .input-group-prepend .cont-icon-message:hover{
+background-color:#d1d1d1;
+transition: all 0.50s ease-In-Out;
+cursor: pointer;
+}
+
+.cont-InputMessage .input-group-prepend .cont-icon-message:focus {
+background-color:#d1d1d1;
+transition: all .20s ease-In-Out;
+}
+
+.cont-InputMessage .input-group-prepend .cont-icon-message:active {
+background-color:red;
+color: white;
+transition: all .10s ease-In-Out;
+}
 
 /* chat message */
 .received,.sent{
@@ -251,8 +283,7 @@ i{
 }
 
 .nav-sidebar div i,.nav-console div i{
-    font-size: 20px;
-    margin-left: 10px;
+    font-size: 18px;
 }
 
 .fa-chevron-right{
@@ -289,10 +320,6 @@ i{
     margin: 0;
 }
 
-input{
-    /* border-radius: 15px; */
-}
-
 input:focus {
     outline: none;
     box-shadow:none !important;
@@ -303,9 +330,46 @@ li{
     list-style: none;
 }
 
+
+/* ICON */
 i{
     cursor: pointer;
+    outline: none;
 }
+
+.cont-icon{
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.cont-icon > i{
+    line-height: 35px;
+}
+
+.cont-icon:hover {
+background-color: #d1d1d1;
+cursor: pointer;
+transition: all 0.25s ease-In-Out;
+}
+
+.cont-icon:focus {
+color:black;
+cursor: pointer;
+transition: all .20s ease-In-Out;
+}
+
+.cont-icon:active {
+color:black;
+cursor: pointer;
+transition: all .20s ease-In-Out;
+}
+
+
+
+
 
 .img-users{
     width: 50px;
@@ -355,8 +419,8 @@ i{
     font-size: 12px;
 }
 
-.mt-70px{
-    margin-top: 70px;
+.mt-65px{
+    margin-top: 65px;
 }
 
 .pr-4{
@@ -394,12 +458,12 @@ i{
 
 
 /* input */
-.input-group>.input-group-prepend:first-child>.input-group-text {
+.cont-list-users .input-group>.input-group-prepend:first-child>.input-group-text {
     border-top-left-radius: 43%;
     border-bottom-left-radius: 43%;
 }
 
-.input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+.cont-list-users .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-top-right-radius: 50%;

@@ -171,15 +171,12 @@ var app = new Vue({
         },
 
         searchValue: function(){
-            this.contactsFiltered = this.contacts;
             if (this.inputSearchUser === "") {
                 this.contactsFiltered = this.contacts.slice();
             }
             else {
                 this.contactsFiltered = this.contacts.filter((element) => {
-                    console.log(element.name);
                     return element.name.toUpperCase().includes(this.inputSearchUser.toUpperCase())
-
                 })
             }
         }
