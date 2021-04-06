@@ -128,24 +128,55 @@
                         <li v-for="(message, i) in chatActiveObj.messages">
                             <!-- sent -->
                             <div class="sent" v-if="(message.status == 'sent')" @mouseover = "IndexHoverMessage = i" @mouseleave = "IndexHoverMessage = null">
-                                <span class="f_Size-20px">{{message.text}}</span>
+                                <span class="f_Size-17px">{{message.text}}</span>
 
                                 <div class="text-right">
-                                    <span  v-if = "(i == IndexHoverMessage)"><i class="fas fa-chevron-down animate__animated animate__fadeInRight animate__fast"></i></span>
-                                    <span  v-else class="dateReceived f_Size-12px">{{message.date.slice(11)}}</span>
+
+                                    <span  v-if = "(i == IndexHoverMessage)">
+                                        <div @click="selectOptionMessShow = true" class="fas fa-chevron-down animate__animated animate__fadeInRight animate__faster"></div>
+                                    </span>
+
+                                    <span  v-else class="dateReceived f_Size-12px animate__animated animate__fadeInRight animate__faster">
+                                        {{message.date.slice(11)}}
+                                    </span>
+
+                                    <div v-if = "(i == IndexHoverMessage && selectOptionMessShow)" class="cont-optionMessage animate__animated animate__flipInY animate__faster">
+                                        <div>Info messaggio</div>
+                                        <div>Rispondi</div>
+                                        <div>Inoltra messaggio</div>
+                                        <div>Messaggio importante</div>
+                                        <hr role="separator" class="dropdown-divider">
+                                        <div>Elimina messaggio</div>
+                                    </div>
+
                                 </div>
 
                             </div>
 
                             <!-- received -->
                             <div class="received" v-else @mouseover = "IndexHoverMessage = i" @mouseleave = "IndexHoverMessage = null">
-                                <span class="f_Size-20px">{{message.text}}</span>
+                                <span class="f_Size-17px">{{message.text}}</span>
                                 <div class="text-right">
-                                    <span  v-if = "(i == IndexHoverMessage)"><i class="fas fa-chevron-down animate__animated animate__fadeInRight animate__fast"></i></span>
-                                    <span  v-else class="dateReceived f_Size-12px">{{message.date.slice(11)}}</span>
+                                    <span  v-if = "(i == IndexHoverMessage)">
+                                        <div @click="selectOptionMessShow = true" class="fas fa-chevron-down animate__animated animate__fadeInRight animate__faster"></div>
+                                    </span>
+                                    <span  v-else class="dateReceived f_Size-12px animate__animated animate__fadeInRight animate__faster">
+                                        {{message.date.slice(11)}}
+                                    </span>
+                                </div>
+
+                                <div v-if = "(i == IndexHoverMessage && selectOptionMessShow)" class="cont-optionMessage">
+                                    <div>Info messaggio</div>
+                                    <div>Rispondi</div>
+                                    <div>Inoltra messaggio</div>
+                                    <div>Messaggio importante</div>
+                                    <hr role="separator" class="dropdown-divider">
+                                    <div>Elimina messaggio</div>
                                 </div>
 
                             </div>
+
+
                         </li>
                     </ul>
                 </div>

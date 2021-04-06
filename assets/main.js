@@ -5,6 +5,8 @@ var app = new Vue({
         chatActiveObj: "",
         IndexHoverMessage: null,
 
+        selectOptionMessShow : false,
+
         userLastAccess: moment().locale('it').calendar().toLowerCase(),
         // change icon search
         inputActive: null,
