@@ -3,6 +3,7 @@ var app = new Vue({
     data: {
         notifications: false,
         chatActiveObj: "",
+        IndexHoverMessage: null,
 
         userLastAccess: moment().locale('it').calendar().toLowerCase(),
         // change icon search
