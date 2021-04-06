@@ -82,11 +82,15 @@
                                     <img v-bind:src="'./assets/img/avatar' +  user.avatar + '.jpg'"  class="img-users" alt="">
                                 </div>
                                 <div class="text-overflow-ell">
-                                    <div>{{user.name}}</div>
+                                    <div class="d-flex">
+                                        <span>{{user.name}}</span>
+                                        <span class="ml-auto">{{user.messages[user.messages.length -1].date}}</span>
+                                    </div>
+
                                     <div class="d-flex align-items-center">
                                         <!-- possibilità di aggiungere un icona relativa al tipo di messaggio con l' aggiunta di una proprietà o più proprietà all'oggetto che specifichi il tipo di messaggio ricevuto e se è stato visualizzato o meno-->
 
-                                        <span v-if="( user.messages[user.messages.length -1].status === 'received')" class="icon-DoubleTick mr-2"></span>
+                                        <span v-if="( user.messages[user.messages.length -1].status === 'sent')" class="icon-DoubleTick mr-2"></span>
                                         <span class="text-overflow-ell" >{{user.messages[user.messages.length -1].text}}</span>
                                     </div>
                                 </div>
@@ -151,9 +155,8 @@
 
             <!-- TODO: creare pagina iniziale -->
             <div v-else class="first-page-chat">
-                <h1>Oh no 😢</h1>
+                <h1 class="text-center mt-70px">Seleziona una chat</h1>
             </div>
-
         </div>
 
         <!-- Script js -->
