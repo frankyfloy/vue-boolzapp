@@ -6,7 +6,7 @@ var app = new Vue({
 
         userLastAccess: moment().locale('it').calendar().toLowerCase(),
         // change icon search
-        InputActive: false,
+        inputActive: null,
         // value search profile
         inputSearchUser: "",
 
@@ -101,8 +101,9 @@ var app = new Vue({
 	},
 
     // usare computed per didattica
-	computed:{
-	},
+	// computed:{
+    //
+	// },
 
     mounted: function() {
        this.contactsFiltered = this.contacts.slice();
@@ -111,6 +112,7 @@ var app = new Vue({
     methods: {
         chatActive: function (obj){
             this.chatActiveObj = obj;
+            console.log(this.inputActive);
         },
 
         sendMessage: function (){
@@ -118,7 +120,7 @@ var app = new Vue({
             if (this.textSend.length) {
 
                 this.chatActiveObj.messages.push({
-                    date: moment().format('LT'),
+                    date: moment().format('L, h:mm:ss'),
                     text: this.textSend,
                     status: 'sent',
                 }),
@@ -132,7 +134,7 @@ var app = new Vue({
 			setTimeout(function () {
 				let obj =
 				{
-					date: this.messageDate,
+					date: moment().format('L, h:mm:ss'),
 					text: "ok",
 					status: 'received'
 				}
@@ -160,15 +162,7 @@ var app = new Vue({
             })
         },
 
-        inputActive: function(){
-            if (this.InputActive) {
-                this.InputActive = false
-            }else {
-                this.InputActive = true
-                // TODO: continuare focus sull input ricerca
-                // this.$refs.input.$el.focus()
-            }
-        },
+
 
         searchValue: function(){
             if (this.inputSearchUser === "") {
@@ -179,6 +173,14 @@ var app = new Vue({
                     return element.name.toUpperCase().includes(this.inputSearchUser.toUpperCase())
                 })
             }
-        }
+        },
+
+        prova: function(){
+            console.log("-----------");
+            this.inputActive = true;
+            console.log(this.inputActive);
+            console.log("-----------");
+
+        },
     }
 });

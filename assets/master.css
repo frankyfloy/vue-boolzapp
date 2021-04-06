@@ -6,12 +6,13 @@
     font-size:100%;
 }
 
+
 body{
     background: linear-gradient(0deg, #dfdfdf 85%, #009788 15%);
+    background-repeat: no-repeat;
     height: 100vh;
     width: 100vw;
-    min-width: 800px;
-    min-height: 300px;
+    min-width: 750px;
     overflow:  hidden;
 }
 
@@ -23,8 +24,9 @@ body{
     padding-right: 10px;
     box-shadow: 5px 10px 18px #888888;
     background-color: #F3EEEA;
-    /* overflow: hidden; */
+    overflow: hidden;
     display: flex;
+    overflow:  hidden;
 }
 
 #sidebar{
@@ -50,7 +52,6 @@ body{
     left: 0;
     height: 65px;
     width: 100%;
-    min-width: 300px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -63,8 +64,8 @@ body{
 
 /* CONTENITORE CHAT */
 .cont-chat{
-    padding-top: 65px;
-    height: 500px;
+    margin: 65px 0;
+    height: 100%;
     width: 100%;
 }
 
@@ -161,6 +162,7 @@ body{
 
 .cont-chat ul{
     padding: 39px;
+    margin-bottom: 7rem;
 }
 
 .input-group-text{
@@ -388,7 +390,7 @@ transition: all .20s ease-In-Out;
     padding-bottom: 2px;
 }
 
-.cont-list-users input::placeholder{
+input::placeholder{
     color: #adabab;
     font-size: 14px;
 }
@@ -446,7 +448,7 @@ transition: all .20s ease-In-Out;
 }
 .scroll::-webkit-scrollbar{
 	-webkit-overflow-scrolling: auto;
-	width: 6px;
+	width: 5px;
 }
 .scroll::-webkit-scrollbar-thumb{
 	border-radius: 4px;
