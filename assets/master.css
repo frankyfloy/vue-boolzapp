@@ -172,7 +172,6 @@ body{
 
 
 /* ******** CONSOLE CHAT ******* */
-/* TODO: pagina iniziale */
 #first-page-chat{
     height: 100%;
     width: 100%;
@@ -335,8 +334,9 @@ transition: all .10s ease-In-Out;
 
 .cont-optionMessage{
     position: absolute;
+    width: 150px;
     top: 55px;
-    right: -110px;
+    right: -20px;
     z-index: 10;
     text-align: left;
     background-color: #ffffff;
@@ -346,7 +346,7 @@ transition: all .10s ease-In-Out;
 }
 
 .cont-optionMessage > div{
-    padding: 12px 8px;
+    padding: 8px 8px;
     cursor: pointer;
 }
 
@@ -507,7 +507,7 @@ input::placeholder{
 /* ---------------Scroll Vertical (Classe Scroll)------------------------- */
 .scroll{
 	overflow-y: auto;
-	overflow-x: hidden;
+	/* overflow-x: hidden; */
 }
 .scroll::-webkit-scrollbar{
 	-webkit-overflow-scrolling: auto;

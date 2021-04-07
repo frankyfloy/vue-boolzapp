@@ -41,8 +41,7 @@
     </head>
 
     <body>
-        <!-- TODO:  @click="inputActive -->
-        <div id="root" @click="inputActive = null">
+        <div id="root" @click="IndexOptionMess = null,inputActive = null">
             <aside id="sidebar">
                 <nav class="nav-sidebar">
                     <div class="ml-3">
@@ -62,28 +61,28 @@
                     </div>
                     <div class="pr-2">
                         <p class="m-0">Ricevi notifiche di nuovi messaggi</p>
-                        <span><a @click="showNotification" href="#">Attiva notifiche desktop</a><span class="fas fa-chevron-right ml-1"></span></span>
-
+                        <span>
+                            <a @click="showNotification" href="#">
+                            Attiva notifiche desktop</a>
+                            <span class="fas fa-chevron-right ml-1"></span>
+                        </span>
                     </div>
                 </div>
 
                 <div class="cont-list-users" :class="[notifications ? 'mt-60px' : '']">
-                    <nav :class="(inputActive ? 'bg-white' : '')">
-                      <div class="input-group">
-                        <div class="input-group-prepend">
+                    <nav :class="[inputActive ? 'bg-white' : '']">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
 
-                            <label  for="myInput" class="input-group-text btn-search pr-3">
-                                <i :class="[inputActive ? 'fa-arrow-left' : 'fa-search', 'fas']"
-                                    @click.stop='inputActive = true'>
-                                    <!-- TODO:  @click.stop="inputActive" -->
-                                </i>
-                            </label>
-
+                                <!-- TODO:  Problema risolto con metodo focus e modifica attributo ref che generava il problema-->
+                                <label  class="input-group-text btn-search pr-3">
+                                    <i  @click.stop="setFocus" :class="[inputActive ? 'fa-arrow-left' : 'fa-search', 'fas']">
+                                    </i>
+                                </label>
+                            </div>
+                            <input v-model="inputSearchUser" @keyup="searchValue" ref="search" type="text" class="form-control" :placeholder="[ inputActive ? '' : 'Cerca o inizia una nuova chat']">
                         </div>
-                        <input v-model="inputSearchUser" @keyup="searchValue" ref = "input" type="text" class="form-control" id="myInput" :placeholder="[ inputActive ? '' : 'Cerca o inizia una nuova chat']">
-                      </div>
                     </nav>
-
 
                     <ul id="list-users" class="scroll">
                         <li v-for="(user,i) in contactsFiltered" @click="chatActive(user)" class="infoProfileChat">
@@ -91,51 +90,40 @@
                                 <img v-bind:src="'./assets/img/avatar' +  user.avatar + '.jpg'"  class="img-users" alt="">
                             </div>
                             <div class="text-overflow-ell">
-
                                 <div class="d-flex">
                                     <span class="f_Size-17px">{{user.name}}</span>
                                     <span v-if="(user.messages.length)" class="ml-auto">{{user.messages[user.messages.length -1].date.slice(11)}}</span>
                                 </div>
-
                                 <div class="d-flex align-items-center">
                                     <!-- possibilità di aggiungere un icona relativa al tipo di messaggio con l' aggiunta di una proprietà o più proprietà all'oggetto che specifichi il tipo di messaggio ricevuto e se è stato visualizzato o meno-->
                                     <div class="">
                                         <span v-if="user.messages.status === 'sent'" class="icon-DoubleTick mr-2">
                                         </span>
                                     </div>
-
                                     <span v-if="user.messages.length" class="text-overflow-ell">
-
                                         {{user.messages[user.messages.length -1].text}}
                                     </span>
                                 </div>
                             </div>
                         </li>
                     </ul>
-
                 </div>
             </aside>
 
             <div id="consoleChat" v-if="(chatActiveObj)">
                 <nav class="nav-console">
                     <div class="d-flex align-items-center ml-3 infoProfileChat">
-
                         <img v-bind:src="'./assets/img/avatar' +  chatActiveObj.avatar + '.jpg'"  class="img-users" alt="">
                         <div class="pl-3">
                             <div>{{chatActiveObj.name}}</div>
                             <p class="mb-0">Ultimo accesso  {{userLastAccess}}</p>
                         </div>
-
                     </div>
 
                     <div class="mr-3">
                         <span class="cont-icon"><i class="fas fa-search"></i></span>
                         <span class="cont-icon"><i class="fas fa-paperclip"></i></span>
                         <span class="cont-icon"><i class="fas fa-ellipsis-v "></i></span>
-
-
-
-
                     </div>
                 </nav>
 
@@ -144,7 +132,9 @@
                         <li v-for="(message, i) in chatActiveObj.messages">
 
                             <!-- sent -->
-                            <div class="sent" v-if="(message.status == 'sent' && chatActiveObj.messages.length)" @mouseover = "IndexHoverMessage = i" @mouseleave = "IndexHoverMessage = null">
+                            <div class="sent" v-if="(message.status == 'sent' && chatActiveObj.messages.length)"
+                            @click.stop="showOptionMenuMess(i)"
+                            @mouseover="IndexHoverMessage = i" @mouseleave="IndexHoverMessage = null">
                                 <span class="f_Size-17px">{{message.text}}</span>
 
                                 <div class="text-right">
@@ -157,7 +147,7 @@
                                         {{message.date.slice(11)}}
                                     </span>
                                 </div>
-                                <div v-if = "(i == IndexHoverMessage && selectOptionMessShow)" class="cont-optionMessage animate__animated animate__flipInY animate__faster">
+                                <div v-if = "(i == IndexOptionMess)" class="cont-optionMessage animate__animated animate__flipInY animate__faster">
                                     <div>Info messaggio</div>
                                     <div>Rispondi</div>
                                     <div>Inoltra messaggio</div>
@@ -172,7 +162,9 @@
                             </div>
 
                             <!-- received -->
-                            <div class="received" v-else-if="(message.status == 'received' && chatActiveObj.messages.length)" @mouseover = "IndexHoverMessage = i" @mouseleave = "IndexHoverMessage = null">
+                            <div class="received" v-else-if="(message.status == 'received' && chatActiveObj.messages.length)"
+                            @click.stop="showOptionMenuMess(i)"
+                            @mouseover="IndexHoverMessage = i" @mouseleave="IndexHoverMessage = null">
                                 <span class="f_Size-17px">{{message.text}}</span>
                                 <div class="text-right">
                                     <span  v-if = "(i == IndexHoverMessage)">
@@ -183,7 +175,7 @@
                                     </span>
                                 </div>
 
-                                <div v-if = "(i == IndexHoverMessage && selectOptionMessShow)" class="cont-optionMessage animate__animated animate__flipInY animate__faster">
+                                <div v-if = "(i == IndexOptionMess)" class="cont-optionMessage animate__animated animate__flipInY animate__faster">
                                     <div>Info messaggio</div>
                                     <div>Rispondi</div>
                                     <div>Inoltra messaggio</div>
@@ -215,7 +207,6 @@
                 </footer>
             </div>
 
-            <!-- TODO: creare pagina iniziale -->
             <div v-else id="first-page-chat" class="animate__animated animate__pulse">
                 <h1 class="text-center mt-60px text-success">Cerca o inizia una nuova chat</h1>
             </div>

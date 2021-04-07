@@ -4,9 +4,9 @@ var app = new Vue({
         notifications: false,
         chatActiveObj: "",
         IndexHoverMessage: null,
-
+        IndexOptionMess: null,
         selectOptionMessShow : false,
-
+        // Generate date
         userLastAccess: moment().locale('it').calendar().toLowerCase(),
         // change icon search
         inputActive: null,
@@ -105,12 +105,6 @@ var app = new Vue({
 		]
 	},
 
-    // computed: {
-    //     firstMess: function () {
-    //
-    //     }
-    // }
-
     mounted: function() {
        this.contactsFiltered = this.contacts.slice();
     },
@@ -168,8 +162,6 @@ var app = new Vue({
             })
         },
 
-
-
         searchValue: function(){
             if (this.inputSearchUser === "") {
                 this.contactsFiltered = this.contacts.slice();
@@ -181,13 +173,19 @@ var app = new Vue({
             }
         },
 
-        // prova: function(){
-        //     console.log("-----------");
-        //     this.inputActive = true;
-        //     console.log(this.inputActive);
-        //     console.log("-----------");
-        //
-        // },
+        setFocus: function(){
+            if (this.inputActive) {
+                this.inputActive = null;
+            }else {
+                this.inputActive = true;
+                this.$refs.search.focus();
+            }
+
+        },
+
+        showOptionMenuMess: function(index){
+            this.IndexOptionMess = index;
+        },
 
         deleteMess : function (indexMess) {
             this.contacts.map((element) => {
