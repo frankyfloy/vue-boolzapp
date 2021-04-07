@@ -16,6 +16,8 @@ var app = new Vue({
         // input message
         textSend: "",
         contactsFiltered : [],
+
+        firstMess : true,
 		contacts: [
 			{
 				name: 'Michele',
@@ -103,10 +105,11 @@ var app = new Vue({
 		]
 	},
 
-    // usare computed per didattica
-	// computed:{
+    // computed: {
+    //     firstMess: function () {
     //
-	// },
+    //     }
+    // }
 
     mounted: function() {
        this.contactsFiltered = this.contacts.slice();
@@ -178,12 +181,23 @@ var app = new Vue({
             }
         },
 
-        prova: function(){
-            console.log("-----------");
-            this.inputActive = true;
-            console.log(this.inputActive);
-            console.log("-----------");
+        // prova: function(){
+        //     console.log("-----------");
+        //     this.inputActive = true;
+        //     console.log(this.inputActive);
+        //     console.log("-----------");
+        //
+        // },
 
-        },
+        deleteMess : function (indexMess) {
+            this.contacts.map((element) => {
+                if(element.name == this.chatActiveObj.name) {
+                    element.messages.splice(indexMess,1);
+                }
+            })
+
+            // Assegno valore null ad IndexHoverMessage per resettare a null la proprietà che salva l'indice del messaggio all hover sul messaggio selezionato, mostrando il menù opzioni del messaggio in questione.
+            this.IndexHoverMessage = null;
+        }
     }
 });

@@ -8,10 +8,13 @@
 
 
 body{
-    background: linear-gradient(0deg, #dfdfdf 85%, #009788 15%);
-    background-repeat: no-repeat;
     height: 100vh;
     width: 100vw;
+    font-family: 'Ubuntu', sans-serif;
+    text-rendering: optimizeLegibility;
+    background: linear-gradient(0deg, #dfdfdf 85%, #009788 15%);
+    background-color: #dfdfdf;
+    background-repeat: no-repeat;
     min-width: 750px;
     overflow:  hidden;
 }
@@ -30,10 +33,11 @@ body{
 #sidebar{
     position: relative;
     width: 30%;
-    min-width: 300px;
+    min-width: 320px;
     height: 100%;
     border-right: 1px solid #888888;
     background-color: #ffffff;
+    overflow: hidden;
 }
 
 #consoleChat{
@@ -48,7 +52,7 @@ body{
     position: absolute;
     top: 0;
     left: 0;
-    height: 65px;
+    height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -62,7 +66,7 @@ body{
 
 /* CONTENITORE CHAT */
 .cont-chat{
-    margin: 65px 0;
+    margin: 60px 0;
     height: 100%;
     width: 100%;
 }
@@ -70,7 +74,7 @@ body{
 /* -----------ASIDE NAV-------------- */
 /* contenitore attiva notifiche */
 .notifications{
-    margin-top: 65px;
+    margin-top: 60px;
     height: 100px;
     display: flex;
     align-items: center;
@@ -82,6 +86,9 @@ body{
     font-size: 14px;
 }
 
+.cont-list-users{
+    height: 100%;
+}
 
 .cont-list-users > nav{
     background-color: #F3EEEA;
@@ -96,17 +103,26 @@ body{
     border-bottom-right-radius: 20px;
 }
 
+#list-users{
+    height: 70%;
+    margin-bottom: 20px;
+    padding-bottom: 30%;
+}
+
 #list-users li{
     width: 100%;
     height: 80px;
     display: flex;
 }
 
-#list-users li > div{
-    display: inline-block;
-
+#list-users li:hover{
+    background-color: #d1d1d1;
+    transition: all 0.25s ease-In-Out;
 }
 
+#list-users li > div{
+    display: inline-block;
+}
 
 #list-users li > div:first-child{
     padding: 0px 10px 0px 15px;
@@ -131,10 +147,9 @@ body{
 
 .text-overflow-ell{
     white-space: nowrap;
-    overflow: hidden;
+    overflow-x: hidden;
     text-overflow: ellipsis;
     width: 100%;
-
 }
 
 /* Transition icon search profile */
@@ -158,9 +173,14 @@ body{
 
 /* ******** CONSOLE CHAT ******* */
 /* TODO: pagina iniziale */
-.first-page-chat{
+#first-page-chat{
     height: 100%;
     width: 100%;
+    background-image: url("img\\whatsapp-icon-seeklogo.com.svg");
+    background-repeat: no-repeat;
+    background-size: 40% 40%;
+    background-position: center;
+    opacity: 0.9;
 }
 
 
@@ -181,7 +201,8 @@ body{
 
 /* ------------input chat---------------*/
 .cont-InputMessage{
-    height: 80px;
+    min-height: 60px;
+    max-height: 70px;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -195,12 +216,12 @@ body{
 }
 
 .cont-InputMessage > .input-group i{
-    font-size: 25px;
+    font-size: 20px;
     color: #999999;
 }
 
 .cont-InputMessage  .input-group input{
-    height: 50px;
+    height: 40px;
 }
 
 
@@ -219,8 +240,8 @@ body{
     background-color: inherit;
     display: inline-block;
     text-align: center;
-    width: 50px;
-    height: 50px;
+    width: 47px;
+    height: 47px;
     margin: 10px;
 }
 
@@ -259,6 +280,8 @@ color: white;
 transition: all .10s ease-In-Out;
 }
 
+
+
 /* chat message */
 .received,.sent{
     display: flex;
@@ -287,6 +310,29 @@ transition: all .10s ease-In-Out;
     align-self: flex-end;
 }
 
+/* Triangoli nuvole messaggi */
+.triangleRight {
+    width: 0;
+    border-bottom: 16px solid #dcf8c6;
+    border-left: 26px solid transparent;
+    border-right: 0px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    top: -7px;
+    right: 0px;
+}
+
+.triangleLeft {
+    width: 0;
+    border-bottom: 16px solid #ffffff;
+    border-left: 0px solid transparent;
+    border-right: 26px solid transparent;
+    cursor: pointer;
+    position: absolute;
+    top: -7px;
+    left: 0px;
+}
+
 .cont-optionMessage{
     position: absolute;
     top: 55px;
@@ -294,13 +340,13 @@ transition: all .10s ease-In-Out;
     z-index: 10;
     text-align: left;
     background-color: #ffffff;
-    padding: 10px 0;
+    padding: 5px 0;
     border-radius: 10px;
     box-shadow: 5px 10px 18px #888888;
 }
 
 .cont-optionMessage > div{
-    padding: 15px 15px;
+    padding: 12px 8px;
     cursor: pointer;
 }
 
@@ -318,7 +364,7 @@ i{
 }
 
 .nav-sidebar div i,.nav-console div i{
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .fa-chevron-right{
@@ -404,12 +450,9 @@ transition: all .20s ease-In-Out;
 } */
 
 
-
-
-
 .img-users{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     text-shadow: 0 1px 1px 1px #888888;
 }
@@ -417,7 +460,6 @@ transition: all .20s ease-In-Out;
 .cont-list-users .input-group-text{
     background-color: white;
 }
-
 
 .cont-list-users input{
     padding: 0;
@@ -430,13 +472,12 @@ input::placeholder{
 }
 
 .input-group{
-    padding: 10px;
+    padding: 8px;
 }
 
 .form-control{
     border: none;
 }
-
 
 
 /* UTILITY */
@@ -455,31 +496,18 @@ input::placeholder{
     font-size: 12px;
 }
 
-.mt-65px{
-    margin-top: 65px;
+.mt-60px{
+    margin-top: 60px;
 }
 
 .pr-4{
     padding-right: 35px;
 }
 
-/* -----BUTTON----- */
-.myBtnController:hover{
-    background-color: rgba(0,0,0,0.84);
-    color: #b1b1b1;
-    /* text-shadow: 0 0 1px #000000; */
-    transform: scale(1.04);
-    text-transform: uppercase;
-    transform-style: preserve-3d;
-    transition: 0.5s;
-}
-
-
 /* ---------------Scroll Vertical (Classe Scroll)------------------------- */
 .scroll{
-    /* TODO: risolvere overglow scroll */
-	/* overflow-y: auto;
-	overflow-x: hidden; */
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 .scroll::-webkit-scrollbar{
 	-webkit-overflow-scrolling: auto;
@@ -487,7 +515,7 @@ input::placeholder{
 }
 .scroll::-webkit-scrollbar-thumb{
 	border-radius: 4px;
-    background-color: #120038;
+    background-color: #009788;
     box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
